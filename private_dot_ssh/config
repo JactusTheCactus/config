@@ -1,0 +1,18 @@
+Host arch fedora nix pc phone
+	IdentityFile ~/.ssh/id/%n
+	IdentitiesOnly yes
+	RequestTTY force
+	LogLevel QUIET
+	Host arch fedora nix pc
+		User devin
+		HostName 100.68.44.21
+		Host arch
+			Port 2222
+		Host fedora
+			Port 2223
+		Host nix
+			Port 2224
+	Host phone
+		User u0_a221
+		HostName 100.70.48.98
+		Port 8022
