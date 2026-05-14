@@ -1,0 +1,149 @@
+[[language]]
+	name = "rust"
+	auto-format = true
+	diagnostic-severity = "Hint"
+	[language.auto-pairs]
+		"<" = ">"
+		"{" = "}"
+		"(" = ")"
+		"[" = "]"
+		'"' = '"'
+		"'" = "'"
+		"|" = "|"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+	[language.formatter]
+		command = "cargo"
+		args = ["+nightly", "fmt","--file=%{buffer_name}"]
+[[language]]
+	name = "html"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "bash"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "typescript"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "racket"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "gas"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "perl"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "markdown"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "m4"
+	file-types = ["m4"]
+	scope = "source.m4"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+	comment-tokens = ["dnl"]
+	[language.auto-pairs]
+		"`" = "'"
+		"(" = ")"
+[[language]]
+	name = "toml"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "python"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "awk"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "pest"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "json"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "text"
+	scope = "file.txt"
+	file-types = ["txt"]
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "ocaml"
+	[language.auto-pairs]
+		"'" = "'"
+		"(" = ")"
+		"[" = "]"
+		'"' = '"'
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "cmake"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "cpp"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "antlr"
+	scope = "main.g4"
+	file-types = ["g4"]
+	comment-tokens = ["//"]
+	[language.block-comment-tokens]
+		start = "/*"
+		end = "*/"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "d"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "c"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+	[language.auto-pairs]
+		"<" = ">"
+		"(" = ")"
+		"{" = "}"
+		"[" = "]"
+		'"' = '"'
+		"'" = "'"
+[[language]]
+	name = "css"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4

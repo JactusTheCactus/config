@@ -1,0 +1,32 @@
+[editor]
+	bufferline = "always"
+	line-number = "relative"
+	shell = ["bash", "-c"]
+	rulers = [80]
+	[editor.indent-guides]
+		character = "\u21E5"
+		render = true
+	[editor.search]
+		smart-case = false
+	[editor.smart-tab]
+		enable = false
+	[editor.soft-wrap]
+		enable = true
+		wrap-at-text-width = true
+	[editor.whitespace]
+		render = "all"
+		[editor.whitespace.characters]
+			nbsp = "|"
+			newline = "\u21B2"
+			nnbsp = "|"
+			space = "\u00B7"
+			tab = "-"
+[keys.normal.tab]
+	b = ":sh ./main.sh"
+	c = ":bc"
+	left = ":bp"
+	q = ":q"
+	right = ":bn"
+	s = ":pipe sort -u"
+	W = ":w!"
+	w = ":w"
