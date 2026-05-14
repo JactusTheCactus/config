@@ -1,7 +1,7 @@
 Host arch fedora nix pc phone
 	IdentityFile ~/.ssh/id/%n
 	IdentitiesOnly yes
-	RequestTTY force
+	# RequestTTY force
 	LogLevel QUIET
 	Host arch fedora nix pc
 		User devin
