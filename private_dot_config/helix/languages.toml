@@ -1,7 +1,6 @@
 [[language]]
 	name = "rust"
 	auto-format = true
-	diagnostic-severity = "Hint"
 	[language.auto-pairs]
 		"<" = ">"
 		"{" = "}"
@@ -144,6 +143,11 @@
 		"'" = "'"
 [[language]]
 	name = "css"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
+[[language]]
+	name = "nu"
 	[language.indent]
 		unit = "\t"
 		tab-width = 4
