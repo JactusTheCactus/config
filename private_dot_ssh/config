@@ -1,11 +1,11 @@
-Host arch fedora nix pc phone
+Host arch fedora laptop nix pc phone
 	IdentityFile ~/.ssh/id/%n
 	IdentitiesOnly yes
 	LogLevel QUIET
 	Host arch fedora laptop nix pc
 		User devin
 		Host laptop
-			# HostName {IP}
+			# HostName {{IP}}
 			ProxyCommand bash -c 'echo "Uh-Oh! Looks like %h doesn't exist!" >&2; exit 1'
 		Host arch fedora nix pc
 			HostName 100.68.44.21
