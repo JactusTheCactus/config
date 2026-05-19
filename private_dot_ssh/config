@@ -6,7 +6,6 @@ Host arch fedora laptop nix pc phone
 		User devin
 		Host laptop
 			# HostName {{IP}}
-			ProxyCommand bash -c 'echo "Uh-Oh! Looks like %h doesn'\''t exist!" >&2; exit 255'
 		Host arch fedora nix pc
 			HostName 100.68.44.21
 			Host arch
