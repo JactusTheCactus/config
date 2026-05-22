@@ -1,0 +1,5 @@
+arch
+fedora
+laptop
+nix
+phone
