@@ -1,12 +1,12 @@
-Host arch fedora laptop nix pc phone
+Host arch fedora laptop nix pc phone temple
 	IdentityFile ~/.ssh/id/%n
 	IdentitiesOnly yes
 	LogLevel QUIET
-	Host arch fedora laptop nix pc
+	Host arch fedora laptop nix pc temple
 		User devin
 		Host laptop
 			# HostName {{IP}}
-		Host arch fedora nix pc
+		Host arch fedora nix pc temple
 			HostName 100.68.44.21
 			Host arch
 				Port 2222
@@ -14,6 +14,8 @@ Host arch fedora laptop nix pc phone
 				Port 2223
 			Host nix
 				Port 2224
+			Host temple
+				Port 2225
 	Host phone
 		User u0_a221
 		HostName 100.70.48.98
