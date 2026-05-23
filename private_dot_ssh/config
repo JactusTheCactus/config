@@ -1,11 +1,9 @@
-Host arch fedora laptop nix pc phone
+Host arch fedora nix pc phone
 	IdentityFile ~/.ssh/id/%n
 	IdentitiesOnly yes
 	LogLevel QUIET
-	Host arch fedora laptop nix pc
+	Host arch fedora nix pc
 		User devin
-		Host laptop
-			# HostName {{IP}}
 		Host arch fedora nix pc
 			HostName 100.68.44.21
 			Host arch
