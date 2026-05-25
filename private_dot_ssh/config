@@ -1,19 +1,17 @@
-Host arch fedora nix omni pc phone void
+Host arch fedora nix pc phone void
 	IdentityFile ~/.ssh/id/%n
 	IdentitiesOnly yes
 	LogLevel QUIET
-	Host arch fedora nix omni pc void
+	Host arch fedora nix pc void
 		User devin
-		Host arch fedora nix omni pc void
+		Host arch fedora nix pc void
 			HostName 100.68.44.21
 			Host arch
 				Port 2222
 			Host nix
 				Port 2223
-			Host omni
-				Port 2224
 			Host void
-				Port 2225
+				Port 2224
 	Host phone
 		User u0_a221
 		HostName 100.70.48.98
