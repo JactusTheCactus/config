@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
 set -uo pipefail
 shellcheck "$0" || exit
-lowdown -tterm <(j2 ~/TODO.md ~/bin/.todo/data.yml -f yaml)
+for i in j{,inja}2; do
+	if command -v "$i" &> /dev/null; then
+		jinja=$i
+		break
+	fi
+done
+if ! [[ -v jinja ]]; then
+	printf '[\e[91mERR\e[0m]: %s\n' "No 'Jinja2' binary installed."
+	exit 1
+fi
+lowdown -tterm <("$jinja" ~/TODO.md ~/bin/.todo/data.yml -f yaml)
