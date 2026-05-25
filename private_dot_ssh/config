@@ -8,14 +8,12 @@ Host arch fedora nix omni pc phone void
 			HostName 100.68.44.21
 			Host arch
 				Port 2222
-			Host fedora
-				Port 2223
 			Host nix
-				Port 2224
+				Port 2223
 			Host omni
-				Port 2225
+				Port 2224
 			Host void
-				Port 2226
+				Port 2225
 	Host phone
 		User u0_a221
 		HostName 100.70.48.98
