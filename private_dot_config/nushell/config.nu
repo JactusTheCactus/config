@@ -36,3 +36,10 @@ def tree [...@ --all (-a)] {
 		--noreport
 	) | str replace $env.HOME '~'
 }
+let agent_env = (ssh-agent -c | lines | each { |line|
+	if ($line | str contains "setenv") {
+		$line | parse "setenv {key} {value};" | get 0
+	}
+} | flatten)
+$env.SSH_AUTH_SOCK = ($agent_env | where key == "SSH_AUTH_SOCK" | get 0.value)
+$env.SSH_AGENT_PID = ($agent_env | where key == "SSH_AGENT_PID" | get 0.value)
