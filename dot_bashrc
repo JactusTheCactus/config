@@ -70,7 +70,7 @@ export LESS_TERMCAP_ZO=$'\e[73m'
 export LESS_TERMCAP_ZW=$'\e[75m'
 export GROFF_NO_SGR=1
 if [[ -v TERMUX_VERSION ]]
-	then export LC_ALL=en_UK.UTF-8
+	then export LC_ALL=en_GB.UTF-8
 	else export LC_ALL=en_CA.UTF-8
 fi
 __ps1_code__() {
