@@ -17,7 +17,10 @@ if [[ -x /usr/bin/dircolors ]]
 		else eval "$(dircolors -b)"
 	fi
 fi
-[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
+[[ -f ~/.bash_aliases ]] \
+	&& . ~/.bash_aliases
+[[ -f ~/.termux_bashrc ]] \
+	&& . ~/.termux_bashrc
 if ! shopt -oq posix
 	then if [[ -f /usr/share/bash-completion/bash_completion ]]
 		then . /usr/share/bash-completion/bash_completion
