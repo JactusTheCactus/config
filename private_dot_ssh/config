@@ -1,17 +1,12 @@
-Host arch nix pc phone void
+Host nix pc phone
 	IdentityFile ~/.ssh/id/%n
 	IdentitiesOnly yes
 	LogLevel QUIET
-	Host arch nix pc void
+	Host nix pc
 		User devin
-		Host arch nix pc void
-			HostName 100.68.44.21
-			Host arch
-				Port 2222
-			Host nix
-				Port 2223
-			Host void
-				Port 2224
+		HostName 100.68.44.21
+		Host nix
+			Port 2222
 	Host phone
 		User u0_a221
 		HostName 100.70.48.98
