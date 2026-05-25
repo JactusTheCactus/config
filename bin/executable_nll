@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -uo pipefail
+get() {
+	curl -s \
+		https://site.api.espn.com/apis/site/v2/sports/lacrosse/nll/scoreboard
+}
+jq=$(cat << !
+.events | map(
+	.status.type.detail +
+	"\n" +
+	(
+		.competitions[]
+		.competitors | map(
+			"\t" +
+			(.homeAway |
+				(.[:1] | ascii_upcase) +
+				.[1:]
+			) +
+			": " +
+			.team.displayName
+		) | join("\n")
+	)
+)[]
+!
+)
+get | jq -r "$jq"

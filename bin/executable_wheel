@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+set -uo pipefail
+running() {
+	kill -0 "$1" &> /dev/null
+	return $?
+}
+# shellcheck disable=SC1003
+declare -A presets=(
+	[ellipsis]='. .. ...'
+	[spinner]='| / - \'
+	[braille]=$'\u2840 \u2804 \u2802 \u2801 \u2808 \u2810 \u2820 \u2880'
+)
+mapfile -t preset_keys <<< "$(printf '%s\n' "${!presets[@]}" | sort)"
+chars=("${presets[ellipsis]}")
+cmd=()
+mode=cmd
+time=(1)
+base=$(basename "$0")
+help() {
+	printf '<%s>\n' "$base"
+	printf '\tUsage:\n'
+	printf '\t\t%s\n' "$base"
+	local options
+	options=(
+		'(-C | --chars) CHARS...'
+		'(--preset | -p) PRESET'
+		'[-c | --command] CMD...'
+		'(-s | command-string) CMD_STR'
+		'(-t | --time) TIME...'
+		'--help | -h | -?'
+	)
+	for i in "${options[@]}"
+		do printf '\t\t\t%s\n' "$i"
+	done
+	printf '\tOptions:\n'
+	printf '\t\t%s CHARS...\n' -C --chars
+	local C
+	C=(
+		"Cannot be used with '--preset'."
+		'CHARS is a list of characters to use.'
+	)
+	printf '\t\t\t%s\n' "${C[@]}"
+	printf '\t\t%s PRESET\n' -p --preset
+	local p
+	p=(
+		"Cannot be used with '--chars'."
+		'PRESET must be a defined preset.'
+		"Defaults to 'ellipsis.'"
+		'Options include;'
+	)
+	printf '\t\t\t%s\n' "${p[@]}"
+	for i in "${preset_keys[@]}"; do
+		read -r -a wheel <<< "${presets[$i]}"
+		printf '\t\t\t\t%s:%s\n' "$i" "$(printf ' "%s"' "${wheel[@]}")"
+	done | column -t -s ':'
+ 	printf '\t\t%s CMD...\n' -c --command
+	local c
+	c=(
+		"Cannot be used with '--command-string'."
+		'CMD is the command to run.'
+		"'-c' is optional if no arguments precede CMD."
+	)
+	printf '\t\t\t%s\n' "${c[@]}"
+	printf '\t\t%s CMD_STR\n' -s --command-string
+	local s
+	s=(
+		"Cannot be used with '--command'."
+		'CMD_STR is the command to run,'
+		'joined into a single string.'
+		"Use this if CMD_STR has arguments that might interfere with $base"
+	)
+	printf '\t\t\t%s\n' "${s[@]}"
+	printf '\t\t%s TIME...\n' -t --time
+	local t
+	t=(
+		'TIME is an array of numbers (integers/floats; see sleep(1)).'
+		'The sum is is the time between frames.'
+		'Defaults to 1 second.'
+	)
+	printf '\t\t\t%s\n' "${t[@]}"
+	# shellcheck disable=SC2046
+	printf '\t\t%s\n' -? -h --help
+	local h
+	h=(
+		'Display this message.'
+		"Also displays if no arguments are provided to '$base'."
+	)
+	printf '\t\t\t%s\n' "${h[@]}"
+}
+main() {
+	if (( $# == 0 )); then
+		help >& 2
+		exit 1
+	fi
+	for i in "$@"
+		do case "$i" in
+			--preset|-p) mode=select;;
+			--chars|-C)
+				mode=wheel
+				chars=()
+			;;
+			--command|-c) mode=cmd;;
+			--command-string|-s) mode=cmd_str;;
+			--help|-h|'-?')
+				help
+				exit 0
+			;;
+			--time|-t)
+				mode='time'
+				time=()
+			;;
+			--test|-T)
+				for j in "${preset_keys[@]}"
+					do main sleep 5 --preset "$j"
+				done
+				help
+				exit 0
+			;;
+			*) case "$mode" in
+				cmd) cmd+=("$i");;
+				cmd_str)
+					read -r -a command <<< "$i"
+					cmd+=("${command[@]}")
+				;;
+				wheel) chars+=("$i");;
+				select) if [[ -v presets[$i] ]]
+					then read -r -a chars <<< "${presets[$i]}"
+				fi;;
+				time) time+=("$i");;
+			esac;;
+		esac
+	done
+	"${cmd[@]}" &
+	local pid
+	pid=$!
+	while running "$pid"
+		do for char in "${chars[@]}"; do
+			if ! running "$pid"
+				then break 2
+			fi
+			printf '\r\e[K%s' "$char"
+			sleep "${time[@]}"
+		done
+	done
+	wait
+	printf '\r'
+}
+main "$@"

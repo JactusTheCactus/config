@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -uo pipefail
+[[ -f package.json ]] || npm init -y
+if [[ -f .gitignore ]]
+	then cat .gitignore | grep "node_modules" > /dev/null \
+		|| echo "node_modules" >> .gitignore
+fi
+npm install

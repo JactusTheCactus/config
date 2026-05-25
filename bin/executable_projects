@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -uo pipefail
+tree -C --noreport --fromfile \
+	<(find ~/Projects \
+		-type f \
+		-name .project \
+		-printf '%h\n' \
+		| sort -u \
+		| perl -pe "s|^$HOME/Projects||g"
+	) \
+	| perl -pe 's|/dev/fd/\d+|Projects|g'

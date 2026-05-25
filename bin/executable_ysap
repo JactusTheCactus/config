@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -uo pipefail
+json=$(curl -s ysap.sh/json)
+while read -r i; do
+	printf '%s.\t%s\n\t%s\n\t\e[4;94m%s\e[0m\n' \
+		"$(jq -r '.num | tostring' <<< "$i")" \
+		"$(jq -r '.title' <<< "$i")" \
+		"$(jq -r '.desc' <<< "$i" \
+			| perl -pe 's|`(.*?)`|\e[1;96m$1\e[0m|g'
+		)" \
+		"$(jq -r '.external.youtube' <<< "$i")"
+done < <(jq -c '.episodes[]' <<< "$json")
+# jq --tab -Cr '
+# 	.episodes[]
+# 	| (.num | tostring) + ".\t" + .title
+# 	+ "\n\t" + .desc
+# 	+ "\n\t" + "\u001b[4;94m" + .external.youtube + "\u001b[0m"
+# ' <<< "$json" \
+# 	| perl -pe 's|`(.*?)`|\e[1;96m$1\e[0m|g'

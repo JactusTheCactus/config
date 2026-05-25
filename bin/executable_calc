@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+set -uo pipefail
+err() {
+	local e str
+	if [[ $1 == -- ]]; then
+		e=true
+		shift
+	else e=false
+	fi
+	str=$1
+	shift
+	# shellcheck disable=SC2059
+	printf "ERR: $str\n" "$@" >&2
+	"$e" && exit 1
+}
+if ! command -v bc &> /dev/null; then
+	err 'command "%s" not found' bc
+	exit 1
+fi
+case "$#" in
+	1) printf '%.2f\n' "$1"; exit 0;;
+	2) err 'argument required after "%s"' "$2";;
+	3) ;;
+	*) err 'Usage: %s <first> <op> <second>' "$0";;
+esac
+first=$1
+op=$2
+second=$3
+shift 3
+for i in "$first" "$second"
+	do [[ $i =~ ^[+-]?[0-9]+(\.[0-9]+)?$ ]] \
+		|| err '"%s" is not a valid number' "$i"
+done
+first=${first/+/}
+second=${second/+/}
+readonly operators=(+ - '*' / % ^ // '<<' '>>')
+pos(){ (( $(bc <<< "$1 > 0") )); }
+nul(){ (( $(bc <<< "$1 == 0") )); }
+add(){ bc -l <<< "$1 + $2"; }
+sub(){ bc -l <<< "$1 - $2"; }
+exp(){ bc -l <<< "$1 ^ $2"; }
+mod(){ bc <<< "$1 % $2"; }
+div(){ if nul "$2"
+	then err '"%s" must not be "0"' "$2"
+	else bc -l <<< "scale=20; $1 / $2"
+fi; }
+mul() { bc -l <<< "$1 * $2"; }
+root() {
+	local a b
+	a=$(pos "$1")
+	b=$(! nul "$2")
+	if $a && $b; then
+		local l d
+		l=$(bc -l <<< "l($1)")
+		d=$(div "$l" "$2")
+		bc -l <<< "e($d)"
+	else
+		$a || err -- '"%s" must be more than "0"' "$1"
+		$b && err -- '"%s" must not be "0"' "$2"
+		exit 1
+	fi
+}
+lsh() {
+	local e
+	e=$(exp 2 "$2")
+	mul "$1" "$e"
+}
+rsh() {
+	local e
+	e=$(exp 2 "$2")
+	div "$1" "$e"
+}
+case "$op" in
+	+) o=add;;
+	-) o=sub;;
+	^) o=exp;;
+	%) o=mod;;
+	/) o=div;;
+	'*') o=mul;;
+	//) o=root;;
+	'<<') o=lsh;;
+	'>>') o=rsh;;
+	*) err '"%s" is an invalid operator\nvalid operators: %s' \
+		"$op" \
+		"${operators[*]}";;
+esac
+printf '%.2f\n' "$("$o" "$first" "$second")"

@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -uo pipefail
+err() { printf '[\e[91mERR\e[0m] %s\n' "$1" >&2; }
+deps=(
+	gum
+	ssh
+)
+missing_deps=()
+for i in "${deps[@]}"
+	do command -v "$i" &> /dev/null || missing_deps+=("$i")
+done
+if (( ${#missing_deps[@]} > 0 )); then
+	for i in "${missing_deps[@]}"
+		do err "Command '$i' not found!" >&2
+	done
+	exit 1
+fi
+machines=(
+	Arch
+	nix:NixOS
+	PC
+	Phone
+)
+view=()
+declare -A target
+for i in "${machines[@]}"; do
+	# [Hostname:]Alias
+	IFS=: read -r host alias <<< "$i"
+	if [[ -z ${alias} ]]; then
+		alias=$host
+		host=${host,,}
+	fi
+	view+=("$alias")
+	target[$alias]=$host
+done
+machine=$(gum choose "${view[@]}" \
+	--header='What machine would you like to SSH into?'
+) \
+	|| exit 0
+if gum confirm 'Would you like to enter an interactive session?'; then
+	ssh "${target[$machine]}"
+else
+	cmd=$(gum write --placeholder='What command would you like to run?') \
+		|| exit 0
+	# shellcheck disable=SC2029
+	ssh "${target[$machine]}" "$cmd"
+fi

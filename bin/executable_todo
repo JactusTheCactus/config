@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -uo pipefail
+shellcheck "$0" || exit
+lowdown -tterm <(j2 ~/TODO.md ~/bin/.todo/data.yml -f yaml)

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+please apt update
+please apt upgrade -y
+please apt autoremove -y
+clear
+neofetch

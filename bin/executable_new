@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+err() {
+	printf '[%sERR%s]: %s\n' \
+		'\e[91m' \
+		'\e[0m' \
+		"$*" \
+		>&2
+	exit 1
+}
+cmd=${BASH_SOURCE##*/}
+case "$#" in
+	0) err "'$cmd' must take a language argument";;
+	1) err "'$cmd' must take a name argument";;
+esac
+lang=${1,,}
+shift
+type=
+# shellcheck disable=2016
+case "$lang" in
+	bash)
+		type=file
+		lines=(
+			'#!/usr/bin/env bash'
+			'set -uo pipefail'
+			'shellcheck "$0" || exit'
+		)
+	;;
+	project) type=project;;
+	*) err "'$lang' is an invalid language";;
+esac
+name=$1
+shift
+case "$type" in
+	file)
+		printf '%s\n' "${lines[@]}" >> "$name"
+		chmod +x "$name"
+	;;
+	project) ./.new/project "$name";;
+esac

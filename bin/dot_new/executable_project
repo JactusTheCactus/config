@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -uo pipefail
+dir="$HOME/Projects/$1"
+mkdir -p "$dir"
+if cd "$dir"; then
+	echo . > .project
+	git_ > /dev/null
+else
+	echo "Err: Could not create <$dir>" >&2
+	exit 1
+fi
+git remote add origin "git@github.com:JactusTheCactus/$(
+	echo "$dir" \
+		| perl -pe "s|$HOME/Projects/||g" \
+		| perl -pe 's|/|-|g'
+).git"
+perl -pe "s|$HOME|~|g" <<< "$dir"

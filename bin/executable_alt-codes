@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+perl -pge '
+		s/^#.*$//gm;		# Remove comment lines
+		s/\n\s*\n+/\n/g;	# Remove empty lines
+		s/^\n+|\n+$//g;		# Remove leading/trailing newlines
+		s/[ \t]+/ /g;		# Collapse whitespace
+	' \
+	/usr/share/X11/locale/en_US.UTF-8/Compose \
+	| fzf \
+		-e \
+		--layout=reverse-list \
+		--border=rounded \
+		--border-label='Alt Codes' \
+		--prompt=' -<{ ' \
+		--info=inline:' }>- ' \
+		--separator='<' \
+		--scrollbar='↓' \
+		--tabstop='4' \
+		--preview="$(cat <<- 'EOF'
+			perl -pge '
+				s|^((?:\s*<.*?>\s*)+).*?"(.*?)" (?:U([\dA-F]+))?.*?$|$2\nU+\U$3\E\n$1|i;
+				s|^U\+$||m;
+				s|\\([\\"])|$1|;
+			' <<< {}
+		EOF
+)"
+case $? in
+	0|130) exit 0;;
+	*) exit $?;;
+esac

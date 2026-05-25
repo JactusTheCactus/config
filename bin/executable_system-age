@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# set -x # debug-mode
+read_date() {
+	local id=$1
+	shift
+	read -r "${id}_d" "${id}_m" "${id}_y" < <(date "$@" +'%-d %-m %Y')
+}
+# `please` is a script for automating `sudo`
+# This is a personal script for an ext4 Linux system
+read_date s -d "$(
+	key='/^Filesystem created:\s*/'
+	"$(if command -v please &> /dev/null
+		then echo please
+		else echo sudo
+	fi)" tune2fs -l "$(findmnt -n -o SOURCE /)" \
+		| awk "$key"'{sub('"$key"',"");print}'
+)"
+read_date e
+# shellcheck disable=2154
+d_d=$((e_d - s_d))
+# shellcheck disable=2154
+d_m=$((e_m - s_m))
+# shellcheck disable=2154
+d_y=$((e_y - s_y))
+if ((d_d < 0)); then
+	((d_m--))
+	d_d=$((d_d + $(date -d "$e_y-$e_m-01 - 1 day" +%d)))
+fi
+if ((d_m < 0)); then
+	((d_y--))
+	d_m=$((d_m + 12))
+fi
+units=()
+((d_y > 0)) && units+=("$d_y years")
+((d_m > 0)) && units+=("$d_m months")
+((d_d > 0 || ${#units[@]} == 0)) && units+=("$d_d days")
+printf '%s is %s' "$HOSTNAME" "${units[0]}"
+if ((${#units[@]} > 1)); then
+	if ((${#units[@]} > 2)); then
+		printf ', %s' "${units[@]:1:$((${#units[@]}-2))}"
+		printf ','
+	fi
+	printf ' & %s' "${units[-1]}"
+fi
+printf ' old\n'

@@ -1,0 +1,171 @@
+#!/usr/bin/env bash
+set -uo pipefail
+help() {
+	local arg b c i lines var
+	c=$'\e[0m'
+	b=$'\e[1m'
+	i=$'\e[3m'
+	case "$1" in
+		all)
+			echo Usage:
+			echo \
+				$'\t'"${BASH_SOURCE##*/}" \
+				"[${i}-h$c]"
+			echo \
+				$'\t'"${BASH_SOURCE##*/}" \
+				"[${i}-c$c ${b}CHAR$c='=']" \
+				"[${i}-n$c]" \
+				"[${i}-q$c]" \
+				"[${i}-e$c ${b}CMD$c...]"
+			printf '%s\n' Options:
+			while read -r i; do
+				help "$i"
+			done < <(printf '%s\n' char exec help label newline quiet test | sort)
+			return
+		;;
+		char)
+			arg='-c, --char'
+			var=CHAR
+			lines=(
+				"${b}CHAR$c is the character that will make up the line."
+				"${b}CHAR$c must be a single character."
+			)
+		;;
+		exec)
+			arg='-e, --exec'
+			var=CMD...
+			lines=(
+				"Run ${b}CMD$c & display it (if ${i}-l$c is omitted) at the start of the line."
+				$'\t'"| ${b}CMD$c |============="
+				"${i}-e$c MUST be the final option."
+			)
+		;;
+		help)
+			arg='-?, -h, --help'
+			lines=(
+				'Display this help message & exit.'
+			)
+		;;
+		label)
+			arg='-l, --label'
+			var=LABEL
+			lines=(
+				"Display ${b}LABEL$c."
+				"${i}-l$c overrides ${i}-e$c."
+			)
+		;;
+		newline)
+			arg='-n, --no-newline'
+			lines=(
+				'Do not display a newline after the line.'
+			)
+		;;
+		quiet)
+			arg='-q, --quiet'
+			lines=(
+				"Do not display ${b}CMD$c specified by ${i}-e$c, or ${b}LABEL$c specified by ${i}-l$c."
+			)
+		;;
+		test)
+			arg='-t, --test'
+			lines=(
+				'Run tests.'
+			)
+		;;
+	esac
+	printf '\t%s' "$i$arg$c"
+	[[ -v var ]] && printf ' %s' "$b$var$c"
+	printf '\n'
+	printf '\t\t%s\n' "${lines[@]}"
+}
+exec=false
+char='='
+help=false
+newline=true
+quiet=false
+while (( $# > 0 )); do
+	case "$1" in
+		-c|--char)
+			if (( $# > 1 )); then
+				shift
+				char=$1
+			else
+				line -l Char
+				help char
+				exit 1
+			fi
+		;;
+		-e|--exec)
+			exec=true
+			shift
+			break
+		;;
+		'-?'|-h|--help) help=true;;
+		-l|--label)
+			shift
+			if (( $# > 0 )); then
+				label=$1
+			else
+				line -l Label
+				help label >&2
+				exit 1
+			fi
+		;;
+		-n|--no-newline) newline=false;;
+		-q|--quiet) quiet=true;;
+		-t|--test)
+			tests=(
+				'Hello, World!'$'\n''@#$%^&*()[]{}\|<>.?/;:"'"'"'-=_+'$'\n\t''Hello, Again!'
+				'Hello, World!@#$%^&*()[]{}\|<>.?/;:"'"'"'-=_+Hello, Again!'
+				'Hello!'
+			)
+			for i in "${tests[@]}"; do
+				line -e echo "$i"
+			done
+			exit 0
+		;;
+		*)
+			line -l Help
+			help all >&2
+			exit 1
+		;;
+	esac
+	shift
+done
+if "$help"; then
+	help all
+	exit
+fi
+args=("$@")
+if [[ -t 1 ]]
+	then width=$(tput cols)
+	else width=50
+fi
+printf '%*s' "$width" '' | tr ' ' "$char"
+if ! "$quiet"; then
+	[[ -t 1 ]] && printf '\r'
+	if [[ -v label ]]
+		then printf '| %s |' "$label"
+		elif (( ${#args[@]} > 0 )); then
+			printf '| '
+			for i in "${args[@]}"; do
+				read -ra words <<< "$i"
+				str=$(printf '%q' "$i")
+				if [[ ${#words[@]} != 1 ]] && ! [[ $str =~ ^\$ ]]; then
+					printf '"%s"' "$str" | perl -pe 's|\\([^"\\a-z])|$1|g'
+				elif [[ ${#words[@]} == 1 ]]; then
+					printf '%s' "$str" | perl -pe 's|\\([^"\\a-z])|$1|g'
+				else
+					printf '%s' "$str"
+				fi
+				printf ' '
+			done
+			printf '|'
+	fi
+fi
+"$newline" && printf '\n'
+if "$exec"; then
+	"${args[@]}"
+	code=$?
+	exit "$code"
+fi

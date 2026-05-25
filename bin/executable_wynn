@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -uo pipefail
+if [[ -v 1 ]]
+	then player=$1
+elif [[ -v MINECRAFT_USER ]]
+	then player=$MINECRAFT_USER
+else
+	cat <<- ! >&2
+		Usage: $(printf '\e[3m')${BASH_SOURCE##*/}$(printf '\e[0m') $(printf '\e[1m')[PLAYER=\$MINECRAFT_USER]$(printf '\e[0m')
+			Consider setting the \$MINECRAFT_USER environment variable
+	!
+	exit 1
+fi
+get() {
+	local query=https://api.wynncraft.com/v3
+	for i in "$@"
+		do case "$i" in
+			player) query+=/$i/$player;;
+			*) query+=/$i;;
+		esac
+	done
+	curl -s "$query"
+}
+json() {
+	local file=$1
+	shift
+	local cmd=(jq)
+	if ! [[ $file == -- ]]
+		then cmd+=(-f "$HOME/bin/.wynn/$file.jq")
+	fi
+	cmd+=("$@")
+	"${cmd[@]}"
+}
+get-json() {
+	local delim='|'
+	local get=()
+	local json=
+	for i in "$@"
+		do case "$i" in
+			--)shift;break;;
+			*)
+				g=$i
+				j=$i
+				if [[ $i =~ $delim ]]; then
+					g=${i%$delim*}
+					j=${i#*$delim}
+				fi
+				get+=("$g")
+				json+=$j/
+				shift
+			;;
+		esac
+	done
+	get "${get[@]}" | json "${json%/}" "$@"
+}
+get-json player -- -r
+while read -r i; do
+	char=$(get player characters "$i")
+	class=$(json -- -r '.type | ascii_downcase' <<< "$char")
+	json player/characters/i -r --arg class "$class" <<< "$char"
+	echo $'\tAbilities:'
+	get-json ability tree "$class|class" -- -r --tab \
+		--argjson \
+			abilities \
+			"$(get-json player characters "$i|class" abilities -- -c)"
+done < <(get-json player characters -- -r)

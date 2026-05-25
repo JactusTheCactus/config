@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -uo pipefail
+cd "$HOME/csol-1.6.0"
+./csol "$@"

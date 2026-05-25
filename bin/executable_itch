@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -uo pipefail
+shellcheck "$0" || exit
+~/.itch/app-26.13.0/itch --no-sandbox

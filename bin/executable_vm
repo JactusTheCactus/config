@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+set -uo pipefail
+err() {
+	printf '[\e[91mERR\e[0m]: %s\n' "$*" >&2
+	exit 1
+}
+vms=()
+while read -r i
+	do vms+=("${i##*/}")
+done < <(find ~/VM -maxdepth 1 -mindepth 1 -type d | sort)
+declare -A ports
+for i in "${!vms[@]}"
+	do ports[${vms[$i]}]=$((2222 + i))
+done
+main() {
+	(( $# == 0 )) \
+		&& err "VM not provided"
+	if [[ $1 == all ]]; then
+		shift
+		for i in "${vms[@]}"
+			do main "$i" "$@"
+		done
+		return 0
+	elif ! [[ -d ~/VM/$1 ]]
+		then err "'$1' is an invalid VM"
+	fi
+	vm=${1@L}
+	shift
+	get() {
+		local file
+		file=$vm/$vm.$1
+		[[ -f ~/VM/$file ]] \
+			|| err "No '$1' file found for '${vm@u}'"
+		printf '%s/VM/%s' "$HOME" "$file"
+	}
+	pid_file=$HOME/VM/$vm/$vm.pid
+	local qcow2 iso
+	qcow2=$(get qcow2) || return 1
+	iso=$(get iso) || return 1
+	# shellcheck disable=SC2054
+	args=(
+		-cpu host
+		-drive file="$qcow2",format=qcow2
+		-enable-kvm
+		-m 4G
+		-netdev user,id=net0,hostfwd=tcp::"${ports[$vm]}"-:22,ipv4=on,ipv6=off
+		-nodefaults
+		-pidfile "$pid_file"
+		-smp 2
+		-device virtio-net-pci,netdev=net0
+	)
+	display=false
+	log=false
+	while (( $# > 0 ))
+		do case "$1" in
+			-D|--daemon) args+=(-daemonize);;
+			-r|--reset) args+=(
+				-boot d
+				-cdrom "$iso"
+			);;
+			-d|--display) display=true;;
+			-l|--log) log=true;;
+			-k|--kill)
+				[[ -f $pid_file ]] \
+					&& kill "$(< "$pid_file")"
+				return 0
+			;;
+			-t|--temp) args+=(-snapshot);;
+			*) err "'$1' is an invalid flag";;
+		esac; shift
+	done
+	# shellcheck disable=SC2054
+	if "$display"
+		then args+=(
+			-display sdl,gl=on
+			-vga virtio
+		)
+		else args+=(-display none)
+	fi
+	args=(
+		qemu-system-x86_64
+		"${args[@]}"
+	)
+	"$log" \
+		&& printf '$ %s\n' "${args[*]}"
+	"${args[@]}" 2> /dev/null &
+	inotifywait -e close_write -t 5 "$pid_file" &> /dev/null || :
+}
+(return 0 2> /dev/null) \
+	|| main "$@"
