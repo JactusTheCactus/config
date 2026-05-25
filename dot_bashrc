@@ -47,7 +47,8 @@ export PERL_MB_OPT='--install_base ~/perl5'
 export PERL_MM_OPT=INSTALL_BASE=/home/devin/perl5
 export PATH=$PATH:$HOME/xclicker/build/debug/src
 run() { nohup "$1" & }
-source ~/.selected_editor
+[[ -f ~/.selected_editor ]] \
+	&& . ~/.selected_editor
 export PATH=$PATH:$HOME/Apps
 [[ -r '/home/devin/.opam/opam-init/init.sh' ]] \
 	&& . ~/.opam/opam-init/init.sh &> /dev/null
@@ -68,7 +69,7 @@ export LESS_TERMCAP_ZV=$'\e[75m'
 export LESS_TERMCAP_ZO=$'\e[73m'
 export LESS_TERMCAP_ZW=$'\e[75m'
 export GROFF_NO_SGR=1
-export LC_ALL=en_CA.UTF-8
+export LC_ALL=en_CA.UTF-8 &> /dev/null
 __ps1_code__() {
 	local code
 	code=$?
@@ -76,4 +77,4 @@ __ps1_code__() {
 }
 PS1='$(__ps1_code__)[\[\e[1;92m\]\u@\h\[\e[0m\]] \[\e[1;94m\]\w\[\e[0m\] \[\e[1;92m\]\$\[\e[0m\] '
 # END:
-todo
+todo 2> /dev/null
