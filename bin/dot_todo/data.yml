@@ -1,3 +1,5 @@
 laptop:
   name: Framework 13
   price: $1,801.53
+vms:
+  - TestOS
