@@ -1,10 +1,10 @@
-Host arch fedora nix pc phone void
+Host arch nix pc phone void
 	IdentityFile ~/.ssh/id/%n
 	IdentitiesOnly yes
 	LogLevel QUIET
-	Host arch fedora nix pc void
+	Host arch nix pc void
 		User devin
-		Host arch fedora nix pc void
+		Host arch nix pc void
 			HostName 100.68.44.21
 			Host arch
 				Port 2222
