@@ -81,5 +81,5 @@ __ps1_code__() {
 }
 PS1='$(__ps1_code__)[\[\e[1;92m\]\u@\h\[\e[0m\]] \[\e[1;94m\]\w\[\e[0m\] \[\e[1;92m\]\$\[\e[0m\] '
 # END:
-todo
 sshd 2> /dev/null || :
+ssh nix 'source ~/.config/nushell/config.nu; todo'
