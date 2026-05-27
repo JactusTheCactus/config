@@ -1,4 +1,18 @@
 #!/usr/bin/env bash
 set -uo pipefail
 shellcheck "$0" || exit
-lowdown -tterm <(minijinja-cli ~/TODO.md ~/bin/.todo/data.yml -f yaml)
+gen() {
+	minininja-cli \
+		~/TODO.md \
+		~/bin/.todo/data.yml -f yaml
+}
+raw=false
+for i in "$@"
+	do case "$i" in
+		-r|--raw) raw=true;;
+	esac
+done
+if "$raw"
+	then gen
+	else lowdown -tterm <(gen)
+fi
