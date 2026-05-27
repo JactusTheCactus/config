@@ -2,7 +2,7 @@
 set -uo pipefail
 shellcheck "$0" || exit
 gen() {
-	minininja-cli \
+	minijinja-cli \
 		~/TODO.md \
 		~/bin/.todo/data.yml -f yaml
 }
