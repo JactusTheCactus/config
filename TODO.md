@@ -6,7 +6,7 @@
 {%- endfor -%}
 {%- endif -%}
 {%- if vms | length > 0 %}
-1. **Setup _VM_s**:
+1. **Setup VMs**:
 {%- for v in vms %}
 	1. `{{ v }}`
 {%- endfor -%}
