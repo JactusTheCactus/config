@@ -9,7 +9,7 @@ folders_first = true
 frontmatter_hidden = true
 show_tags = true
 check_updates = true
-transparent_bg = false
+transparent_bg = true
 
 [editor]
 line_wrap = true
