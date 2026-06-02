@@ -27,6 +27,12 @@ case "$lang" in
 			'fi'
 		)
 	;;
+	nu|nushell)
+		type=file
+		lines=(
+			'#!/usr/bin/env nu'
+		)
+	;;
 	project) type=project;;
 	*) err "'$lang' is an invalid language";;
 esac
