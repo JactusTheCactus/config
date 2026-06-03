@@ -18,7 +18,7 @@ case "$lang" in
 		lines=(
 			'#!/usr/bin/env bash'
 			'set -uo pipefail'
-			'if command -v shellcheck; then'
+			'if command -v shellcheck &> /dev/null; then'
 			$'\tshellcheck "$0" || exit'
 			'fi'
 		)
