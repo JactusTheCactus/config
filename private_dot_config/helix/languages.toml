@@ -151,3 +151,8 @@
 	[language.indent]
 		unit = "\t"
 		tab-width = 4
+[[language]]
+	name = "nasm"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
