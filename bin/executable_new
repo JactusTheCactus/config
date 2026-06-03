@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 err() {
-	printf '[%sERR%s]: %s\n' \
-		'\e[91m' \
-		'\e[0m' \
-		"$*" \
-		>&2
+	printf '[\e[91mERR\e[0m]: %s\n' "$*" >&2
 	exit 1
 }
 cmd=${BASH_SOURCE##*/}
