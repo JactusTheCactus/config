@@ -15,4 +15,3 @@ git remote add origin "git@github.com:JactusTheCactus/$(
 		| perl -pe 's|/|-|g'
 ).git"
 perl -pe "s|$HOME|~|g" <<< "$dir"
-. ~/bin/.cdls "$dir"
