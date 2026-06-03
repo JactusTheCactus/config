@@ -39,5 +39,5 @@ case "$type" in
 		printf '%s\n' "${lines[@]}" >> "$name"
 		chmod +x "$name"
 	;;
-	project) ./.new/project "$name";;
+	project) ~/bin/.new/project "$name";;
 esac
