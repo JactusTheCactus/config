@@ -44,12 +44,3 @@ let agent_env = (ssh-agent -c | lines | each { |line|
 $env.SSH_AUTH_SOCK = ($agent_env | where key == "SSH_AUTH_SOCK" | get 0.value)
 $env.SSH_AGENT_PID = ($agent_env | where key == "SSH_AGENT_PID" | get 0.value)
 todo
-def chezmoi-update [file: path] {
-	with-env { EDITOR: nano } { chezmoi edit $file }
-	cd ~/.local/share/chezmoi
-	git add .
-	try { git commit -m - }
-	git push
-	chezmoi update
-	open ~/Machines.txt | sshp -j 'chezmoi update'
-}

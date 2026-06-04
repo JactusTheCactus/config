@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -uo pipefail
+if command -v shellcheck &> /dev/null; then
+	shellcheck "$0" || exit
+fi
+t=$(mktemp -d)
+cleanup() { rm -rf "$t"; }
+trap cleanup EXIT
+script=$1
+shift
+for i in "$@"
+	do ln -s \
+		"$(command -v "$i")" \
+		"$t/$i"
+done
+env -i - PATH="$t" "$(realpath "$script")"
