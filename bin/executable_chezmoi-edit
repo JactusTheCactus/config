@@ -7,5 +7,5 @@ def main [file: path] {
 	try { git commit -m - }
 	git push
 	chezmoi update
-	sshp -j 'chezmoi update'
+	open ~/Machines.txt | sshp -j 'chezmoi update'
 }
