@@ -60,9 +60,9 @@ return merge(wezterm.config_builder(), {
 	},
 	min_scroll_bar_height = '2cell',
 	visual_bell = {
-		fade_in_duration_ms = 100,
+		fade_in_duration_ms = 150,
 		fade_in_function = 'EaseIn',
-		fade_out_duration_ms = 100,
+		fade_out_duration_ms = 150,
 		fade_out_function = 'EaseOut',
 	},
 })
