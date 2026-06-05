@@ -51,7 +51,7 @@ end)
 config.background = merge(config.background, {
 	{
 		source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
-		opacity = 0.99
+		opacity = 0.95
 	}
 })
 config.clean_exit_codes = { 0, 130 }
