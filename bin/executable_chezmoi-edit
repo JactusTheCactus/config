@@ -1,9 +1,12 @@
 #!/usr/bin/env nu
 
-def main [...files: path] {
+def main [
+	...files: path
+	--editor (-e) = nano
+] {
 	for $f in $files {
 		with-env {
-			EDITOR: (which nano).path.0
+			EDITOR: (which $editor).path.0
 		} {
 			chezmoi edit $f
 		}
