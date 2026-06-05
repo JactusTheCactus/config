@@ -29,16 +29,6 @@ local function merge(default, overwrite)
 end
 -- Config
 local wezterm = require 'wezterm'
-local config = wezterm.config_builder()
-config.font_size = 20
-config.font = wezterm.font 'Fira Code'
-local act = wezterm.action
-local act_rel = act.ActivateTabRelative
-config.keys = {
-	{ key = 'LeftArrow', mods = 'CTRL', action = act_rel(-1) },
-	{ key = 'RightArrow', mods = 'CTRL', action = act_rel(1) },
-	{ key = 't', mods = 'CTRL', action = act.SpawnTab 'CurrentPaneDomain' }
-}
 wezterm.on("update-status", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
 	local dimensions = pane:get_dimensions()
@@ -48,11 +38,21 @@ wezterm.on("update-status", function(window, pane)
 	})
 	window:set_config_overrides(overrides)
 end)
-config.background = merge(config.background, {
-	{
-		source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
-		opacity = 0.95
+local act = wezterm.action
+local act_rel = act.ActivateTabRelative
+return merge(wezterm.config_builder(), {
+	background = {
+		{
+			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' }
+			opacity = 0.95
+		}
+	}
+	clean_exit_codes = { 130 }
+	font = wezterm.font 'Fira Code'
+	font_size = 20
+	keys = {
+		{ mods = 'CTRL', key = 'LeftArrow', action = act_rel(-1) }
+		{ mods = 'CTRL', key = 'RightArrow', action = act_rel(1) }
+		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' }
 	}
 })
-config.clean_exit_codes = { 0, 130 }
-return config
