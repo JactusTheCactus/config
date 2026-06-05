@@ -1,7 +1,13 @@
 #!/usr/bin/env nu
 
-def main [file: path] {
-	with-env { EDITOR: (which nano).path.0 } { chezmoi edit $file }
+def main [...files: path] {
+	for $f in $files {
+		with-env {
+			EDITOR: (which nano).path.0
+		} {
+			chezmoi edit $f
+		}
+	}
 	cd ~/.local/share/chezmoi
 	git add .
 	try { git commit -m - }
