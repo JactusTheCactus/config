@@ -52,6 +52,6 @@ return helpers.merge(wezterm.config_builder(), {
 	},
 	window_frame = {
 		font = fira,
-		font_size = 20,
+		font_size = 16,
 	},
 })
