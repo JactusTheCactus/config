@@ -50,6 +50,10 @@ return helpers.merge(wezterm.config_builder(), {
 		fade_out_duration_ms = 150,
 		fade_out_function = 'EaseOut',
 	},
+	window_content_alignment = {
+	horizontal = 'Center',
+	vertical = 'Center',
+	},
 	window_frame = {
 		font = fira,
 		font_size = 16,
