@@ -44,3 +44,6 @@ let agent_env = (ssh-agent -c | lines | each { |line|
 $env.SSH_AUTH_SOCK = ($agent_env | where key == "SSH_AUTH_SOCK" | get 0.value)
 $env.SSH_AGENT_PID = ($agent_env | where key == "SSH_AGENT_PID" | get 0.value)
 todo
+def diff [...@] {
+	^diff -d --color ...$@
+}
