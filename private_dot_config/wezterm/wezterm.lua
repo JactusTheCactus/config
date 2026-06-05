@@ -23,7 +23,6 @@ config.keys = {
 	{ key = 'RightArrow', mods = 'CTRL', action = act_rel(1) },
 	{ key = 't', mods = 'CTRL', action = act.SpawnTab 'CurrentPaneDomain' }
 }
-config.status_update_interval = 100 -- milliseconds
 wezterm.on("update-status", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
 	local dimensions = pane:get_dimensions()
