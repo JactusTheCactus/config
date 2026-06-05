@@ -7,7 +7,7 @@ function helpers.all(conditions)
 	end
 	return true
 end
-function helpers.merge(defaut, overwrite)
+function helpers.merge(default, overwrite)
 	local result = {}
 	for k, v in pairs(default or {})
 		do result[k] = v
