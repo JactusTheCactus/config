@@ -25,6 +25,7 @@ return helpers.merge(wezterm.config_builder(), {
 		scrollbar_thumb = '#666',
 		visual_bell = '#444',
 	},
+	custom_block_glyphs = false,
 	default_cursor_style = 'BlinkingBar',
 	enable_wayland = false,
 	font = wezterm.font 'Fira Code',
