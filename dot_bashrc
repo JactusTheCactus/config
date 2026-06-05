@@ -82,5 +82,7 @@ __ps1_code__() {
 PS1='$(__ps1_code__)[\[\e[1;92m\]\u@\h\[\e[0m\]] \[\e[1;94m\]\w\[\e[0m\] \[\e[1;92m\]\$\[\e[0m\] '
 # END:
 sshd 2> /dev/null || :
-command -v nu &> /dev/null \
-	&& exec nu
+if command -v nu &> /dev/null
+	then exec nu
+	else printf '%s\n' "'nu'"' is not installed; defaulting to '"'bash'" >&2
+fi
