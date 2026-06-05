@@ -1,11 +1,15 @@
 -- Helpers
 local function all(conditions)
 	for _, v in ipairs(conditions) do
-		if not v then
-			return false
-		end
+		if not v then return false end
 	end
 	return true
+end
+local function any(conditions)
+	for _, v in ipairs(conditions) do
+		if v then return true end
+	end
+	return false
 end
 -- Config
 local wezterm = require 'wezterm'
