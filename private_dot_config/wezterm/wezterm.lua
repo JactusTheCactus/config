@@ -54,4 +54,5 @@ return merge(wezterm.config_builder(), {
 		{ mods = 'CTRL', key = 'RightArrow', action = act_rel(1) },
 		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' }
 	}
+	min_scroll_bar_height = '2cell'
 })
