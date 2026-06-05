@@ -49,7 +49,7 @@ return merge(wezterm.config_builder(), {
 			horizontal_align = 'Center',
 			attachment = { Parallax = 0.1 },
 			repeat_y = 'Repeat',
-			repeat_y_size = '75%'
+			repeat_y_size = '87.5%'
 		}
 	},
 	clean_exit_codes = { 130 },
