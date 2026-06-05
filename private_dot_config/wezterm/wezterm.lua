@@ -13,10 +13,10 @@ local function any(conditions)
 end
 local function merge(default, overwrite)
 	local result = {}
-	for k, v in pairs(default) do
+	for k, v in pairs(default or {}) do
 		result[k] = v
 	end
-	for k, v in pairs(overwrite) do
+	for k, v in pairs(overwrite or {}) do
 		if all({
 			type(v) == 'table',
 			type(result[k]) == 'table'
