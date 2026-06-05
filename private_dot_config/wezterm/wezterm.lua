@@ -50,7 +50,7 @@ wezterm.on("update-status", function(window, pane)
 end)
 config.background = merge(config.background, {
 	{
-		source = { File = '/usr/share/backgrounds/ubuntu-default-greyscale-wallpaper.png' },
+		source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
 		opacity = 0.9
 	}
 })
