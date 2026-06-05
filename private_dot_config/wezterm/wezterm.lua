@@ -47,7 +47,8 @@ return merge(wezterm.config_builder(), {
 			opacity = 0.95,
 			vertical_align = 'Middle',
 			horizontal_align = 'Center',
-			attachment = { Parallax = 0.1 }
+			attachment = { Parallax = 0.1 },
+			repeat_y = 'Repeat'
 		}
 	},
 	clean_exit_codes = { 130 },
