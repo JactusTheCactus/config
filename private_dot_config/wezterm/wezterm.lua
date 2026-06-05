@@ -43,16 +43,16 @@ local act_rel = act.ActivateTabRelative
 return merge(wezterm.config_builder(), {
 	background = {
 		{
-			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' }
+			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
 			opacity = 0.95
 		}
-	}
-	clean_exit_codes = { 130 }
-	font = wezterm.font 'Fira Code'
-	font_size = 20
+	},
+	clean_exit_codes = { 130 },
+	font = wezterm.font 'Fira Code',
+	font_size = 20,
 	keys = {
-		{ mods = 'CTRL', key = 'LeftArrow', action = act_rel(-1) }
-		{ mods = 'CTRL', key = 'RightArrow', action = act_rel(1) }
+		{ mods = 'CTRL', key = 'LeftArrow', action = act_rel(-1) },
+		{ mods = 'CTRL', key = 'RightArrow', action = act_rel(1) },
 		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' }
 	}
 })
