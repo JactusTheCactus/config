@@ -49,8 +49,10 @@ wezterm.on("update-status", function(window, pane)
 	window:set_config_overrides(overrides)
 end)
 config.background = merge(config.background, {
-	source = { File = '/usr/share/backgrounds/ubuntu-default-greyscale-wallpaper.png' },
-	opacity = 0.5
+	{
+		source = { File = '/usr/share/backgrounds/ubuntu-default-greyscale-wallpaper.png' },
+		opacity = 0.5
+	}
 })
 config.clean_exit_codes = { 0, 130 }
 return config
