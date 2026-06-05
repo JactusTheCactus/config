@@ -1,23 +1,17 @@
 -- Helpers
 local function all(conditions)
-	for _, v in ipairs(conditions) do
-		if not v then return false end
+	for _, v in ipairs(conditions)
+		do if not v then return false end
 	end
 	return true
 end
-local function any(conditions)
-	for _, v in ipairs(conditions) do
-		if v then return true end
-	end
-	return false
-end
 local function merge(default, overwrite)
 	local result = {}
-	for k, v in pairs(default or {}) do
-		result[k] = v
+	for k, v in pairs(default or {})
+		do result[k] = v
 	end
-	for k, v in pairs(overwrite or {}) do
-		if all({
+	for k, v in pairs(overwrite or {})
+		do if all({
 			type(v) == 'table',
 			type(result[k]) == 'table'
 		})
@@ -47,9 +41,9 @@ return merge(wezterm.config_builder(), {
 			opacity = 0.95,
 			vertical_align = 'Middle',
 			horizontal_align = 'Center',
-			attachment = { Parallax = 1 }, -- 0.1 },
+			attachment = { Parallax = 0.1 },
 			repeat_y = 'Repeat',
-			repeat_y_size = string.format('%.2f%%', 100 * (1 - (1 / (2 ^ 10))))
+			repeat_y_size = '1cell' -- string.format('%.2f%%', 100 * (1 - (1 / (2 ^ 10))))
 		}
 	},
 	clean_exit_codes = { 130 },
