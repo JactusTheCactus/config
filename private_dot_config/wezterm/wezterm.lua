@@ -17,7 +17,10 @@ local function merge(default, overwrite)
 		result[k] = v
 	end
 	for k, v in pairs(overwrite) do
-		if all({type(v) == 'table', type(result[k]) == 'table'})
+		if all({
+			type(v) == 'table',
+			type(result[k]) == 'table'
+		})
 			then result[k] = merge(result[k], v)
 			else result[k] = v
 		end
