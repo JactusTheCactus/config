@@ -58,7 +58,7 @@ return merge(wezterm.config_builder(), {
 		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
 	},
 	min_scroll_bar_height = '2cell',
-	visual_bell {
+	visual_bell = {
 		fade_in_duration_ms = 10,
 	},
 })
