@@ -32,7 +32,5 @@ wezterm.on("update-status", function(window, pane)
 	})
 	window:set_config_overrides(overrides)
 end)
-config.background = {
-	opacity = 0.5
-}
+config.background.opacity = 0.5
 return config
