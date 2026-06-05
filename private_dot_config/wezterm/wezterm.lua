@@ -51,7 +51,7 @@ end)
 config.background = merge(config.background, {
 	{
 		source = { File = '/usr/share/backgrounds/ubuntu-default-greyscale-wallpaper.png' },
-		opacity = 0.75
+		opacity = 0.9
 	}
 })
 config.clean_exit_codes = { 0, 130 }
