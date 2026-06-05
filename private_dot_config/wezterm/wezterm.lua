@@ -43,7 +43,7 @@ return merge(wezterm.config_builder(), {
 			horizontal_align = 'Center',
 			attachment = { Parallax = 0.1 },
 			repeat_y = 'Repeat',
-			repeat_y_size = '1cell' -- string.format('%.2f%%', 100 * (1 - (1 / (2 ^ 10))))
+			repeat_y_size = string.format('%.2f%%', 100 * (1 - (1 / (2 ^ 10))))
 		}
 	},
 	clean_exit_codes = { 130 },
