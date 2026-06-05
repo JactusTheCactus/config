@@ -50,7 +50,7 @@ return merge(wezterm.config_builder(), {
 			attachment = { Parallax = 0.1 },
 			repeat_y = 'Repeat',
 			repeat_y_size = string.format('%.2f%%',
-				100 * (1 - (1 / (2 ^ 5)))
+				100 * (1 - (1 / (2 ^ 10)))
 			)
 		}
 	},
