@@ -49,7 +49,7 @@ return merge(wezterm.config_builder(), {
 	clean_exit_codes = { 130 },
 	colors = {
 		scrollbar_thumb = '#666',
-		visual_bell = '#444',
+		visual_bell = '#222',
 	},
 	font = wezterm.font 'Fira Code',
 	font_size = 20,
