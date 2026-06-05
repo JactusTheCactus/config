@@ -11,6 +11,7 @@ wezterm.on("update-status", function(window, pane)
 end)
 local act = wezterm.action
 local act_rel = act.ActivateTabRelative
+local fira = wezterm.font 'Fira Code'
 return helpers.merge(wezterm.config_builder(), {
 	background = {
 		{
@@ -28,7 +29,7 @@ return helpers.merge(wezterm.config_builder(), {
 	custom_block_glyphs = false,
 	default_cursor_style = 'BlinkingBar',
 	enable_wayland = false,
-	font = wezterm.font 'Fira Code',
+	font = fira,
 	font_size = 20,
 	keys = {
 		{ mods = 'CTRL', key = 'LeftArrow', action = act_rel(-1) },
@@ -48,5 +49,9 @@ return helpers.merge(wezterm.config_builder(), {
 		fade_in_function = 'EaseIn',
 		fade_out_duration_ms = 150,
 		fade_out_function = 'EaseOut',
+	},
+	window_frame = {
+		font = fira,
+		font_size = 20,
 	},
 })
