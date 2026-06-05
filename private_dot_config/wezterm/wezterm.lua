@@ -14,7 +14,7 @@ local act_rel = act.ActivateTabRelative
 return helpers.merge(wezterm.config_builder(), {
 	background = {
 		{
-			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png', },
+			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
 			opacity = 0.95,
 			vertical_align = 'Middle',
 			horizontal_align = 'Center',
