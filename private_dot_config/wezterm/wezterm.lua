@@ -33,6 +33,7 @@ return helpers.merge(wezterm.config_builder(), {
 		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
 	},
 	min_scroll_bar_height = '2cell',
+	selection_word_boundary = ' \t\n{}[]()"\'`.,;:/?~!@#$%^&*-_=+|<>',
 	show_tab_index_in_tab_bar = false,
 	swallow_mouse_click_on_pane_focus = true,
 	swallow_mouse_click_on_window_focus = true,
