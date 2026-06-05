@@ -1,10 +1,4 @@
 -- Helpers
-local function all(conditions)
-	for _, v in ipairs(conditions)
-		do if not v then return false end
-	end
-	return true
-end
 local function merge(default, overwrite)
 	local result = {}
 	for k, v in pairs(default or {})
@@ -21,12 +15,13 @@ local function merge(default, overwrite)
 	end
 	return result
 end
+local helpers = require 'helpers'
 -- Config
 local wezterm = require 'wezterm'
 wezterm.on("update-status", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
 	local dimensions = pane:get_dimensions()
-	overrides.enable_scroll_bar = all({
+	overrides.enable_scroll_bar = helpers.all({
 		dimensions.scrollback_rows > dimensions.viewport_rows,
 		not pane:is_alt_screen_active()
 	})
