@@ -59,6 +59,7 @@ return merge(wezterm.config_builder(), {
 		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
 	},
 	min_scroll_bar_height = '2cell',
+	ui_key_cap_rendering = 'WindowsSymbols',
 	visual_bell = {
 		fade_in_duration_ms = 150,
 		fade_in_function = 'EaseIn',
