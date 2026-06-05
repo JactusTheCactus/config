@@ -4,6 +4,5 @@ return {
 			do if not v then return false end
 		end
 		return true
-	end,
-	--merge = function(defaul)
+	end
 }
