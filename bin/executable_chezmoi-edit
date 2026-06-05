@@ -6,7 +6,7 @@ def main [
 ] {
 	for $f in $files {
 		with-env {
-			EDITOR: (which $editor).path.0
+			EDITOR: (which $editor).0.path
 		} {
 			chezmoi edit $f
 		}
