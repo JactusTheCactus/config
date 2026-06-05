@@ -48,7 +48,7 @@ return merge(wezterm.config_builder(), {
 	},
 	clean_exit_codes = { 130 },
 	colors = {
-		scrollbar_thumb = '#444',
+		scrollbar_thumb = '#666',
 	},
 	font = wezterm.font 'Fira Code',
 	font_size = 20,
