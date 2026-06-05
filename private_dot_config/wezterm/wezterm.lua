@@ -9,4 +9,5 @@ config.keys = {
 	{ key = 'RightArrow', mods = 'CTRL', action = act_rel(1) },
 	{ key = 't', mods = 'CTRL', action = act.SpawnTab 'CurrentPaneDomain' }
 }
+config.enable_scroll_bar = true
 return config
