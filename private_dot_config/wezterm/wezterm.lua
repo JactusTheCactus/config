@@ -46,7 +46,7 @@ return merge(wezterm.config_builder(), {
 			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
 			opacity = 0.95,
 			vertical_align = 'Middle',
-			horizontal_align = 'Center'
+			horizontal_align = 'Center',
 			attachment = { Parallax = 0.1 }
 		}
 	},
