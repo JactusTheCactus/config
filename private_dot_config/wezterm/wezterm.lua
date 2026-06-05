@@ -37,14 +37,14 @@ local act_rel = act.ActivateTabRelative
 return merge(wezterm.config_builder(), {
 	background = {
 		{
-			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
+			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png', },
 			opacity = 0.95,
 			vertical_align = 'Middle',
 			horizontal_align = 'Center',
 			attachment = { Parallax = 0.1 },
 			repeat_y = 'Repeat',
-			repeat_y_size = string.format('%.2f%%', 100 * (1 - (1 / (2 ^ 10))))
-		}
+			repeat_y_size = string.format('%.2f%%', 100 * (1 - (1 / (2 ^ 10)))),
+		},
 	},
 	clean_exit_codes = { 130 },
 	font = wezterm.font 'Fira Code',
@@ -52,7 +52,7 @@ return merge(wezterm.config_builder(), {
 	keys = {
 		{ mods = 'CTRL', key = 'LeftArrow', action = act_rel(-1) },
 		{ mods = 'CTRL', key = 'RightArrow', action = act_rel(1) },
-		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' }
-	}
-	min_scroll_bar_height = '2cell'
+		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
+	},
+	min_scroll_bar_height = '2cell',
 })
