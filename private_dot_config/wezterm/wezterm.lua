@@ -48,7 +48,7 @@ return merge(wezterm.config_builder(), {
 			vertical_align = 'Middle',
 			horizontal_align = 'Center',
 			attachment = { Parallax = 0.1 },
-			repeat_y = 'Repeat'
+			repeat_y = 'Repeat',
 			repeat_y_size = '200%'
 		}
 	},
