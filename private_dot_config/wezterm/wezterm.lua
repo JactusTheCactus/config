@@ -1,22 +1,4 @@
--- Helpers
-local function merge(default, overwrite)
-	local result = {}
-	for k, v in pairs(default or {})
-		do result[k] = v
-	end
-	for k, v in pairs(overwrite or {})
-		do if all({
-			type(v) == 'table',
-			type(result[k]) == 'table'
-		})
-			then result[k] = merge(result[k], v)
-			else result[k] = v
-		end
-	end
-	return result
-end
 local helpers = require 'helpers'
--- Config
 local wezterm = require 'wezterm'
 wezterm.on("update-status", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
@@ -29,7 +11,7 @@ wezterm.on("update-status", function(window, pane)
 end)
 local act = wezterm.action
 local act_rel = act.ActivateTabRelative
-return merge(wezterm.config_builder(), {
+return helpers.merge(wezterm.config_builder(), {
 	background = {
 		{
 			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png', },
