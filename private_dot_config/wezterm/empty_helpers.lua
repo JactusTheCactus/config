@@ -17,7 +17,7 @@ function helpers.merge(default, overwrite)
 			type(result[k]) == 'table',
 			type(v) == 'table',
 		})
-			then result[k] = merge(result[k], v)
+			then result[k] = helpers.merge(result[k], v)
 			else result[k] = v
 		end
 	end
