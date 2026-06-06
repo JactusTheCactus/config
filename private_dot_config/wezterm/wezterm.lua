@@ -51,8 +51,8 @@ return helpers.merge(wezterm.config_builder(), {
 		fade_out_function = 'EaseOut',
 	},
 	window_content_alignment = {
-	horizontal = 'Center',
-	vertical = 'Center',
+		horizontal = 'Center',
+		vertical = 'Center',
 	},
 	window_frame = {
 		font = fira,
