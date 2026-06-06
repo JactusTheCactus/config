@@ -13,18 +13,16 @@ local act = wezterm.action
 local act_rel = act.ActivateTabRelative
 local fira = wezterm.font 'Fira Code'
 return helpers.merge(wezterm.config_builder(), {
-	background = {
-		{
-			source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
-			opacity = 0.95,
-			vertical_align = 'Middle',
-			horizontal_align = 'Center',
-		},
-	},
+	background = {{
+		source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
+		opacity = 0.95,
+		vertical_align = 'Middle',
+		horizontal_align = 'Center'
+	}},
 	clean_exit_codes = { 130 },
 	colors = {
 		scrollbar_thumb = '#666',
-		visual_bell = '#444',
+		visual_bell = '#444'
 	},
 	custom_block_glyphs = false,
 	default_cursor_style = 'BlinkingBar',
@@ -34,7 +32,7 @@ return helpers.merge(wezterm.config_builder(), {
 	keys = {
 		{ mods = 'CTRL', key = 'LeftArrow', action = act_rel(-1) },
 		{ mods = 'CTRL', key = 'RightArrow', action = act_rel(1) },
-		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
+		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' }
 	},
 	log_unknown_escape_sequences = true,
 	min_scroll_bar_height = '2cell',
@@ -48,14 +46,10 @@ return helpers.merge(wezterm.config_builder(), {
 		fade_in_duration_ms = 150,
 		fade_in_function = 'EaseIn',
 		fade_out_duration_ms = 150,
-		fade_out_function = 'EaseOut',
-	},
-	window_content_alignment = {
-		horizontal = 'Center',
-		vertical = 'Center',
+		fade_out_function = 'EaseOut'
 	},
 	window_frame = {
 		font = fira,
-		font_size = 16,
-	},
+		font_size = 16
+	}
 })
