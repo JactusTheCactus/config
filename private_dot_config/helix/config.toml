@@ -22,7 +22,7 @@
 			space = "\u00B7"
 			tab = "-"
 [keys.normal.tab]
-	b = ":sh if [[ -f main.sh ]]' then ./main.sh; elif [[ -f main.nu ]]; then ./main.nu; fi"
+	b = ":sh if [[ -f main.sh ]] then ./main.sh; elif [[ -f main.nu ]]; then ./main.nu; fi"
 	c = ":bc"
 	left = ":bp"
 	q = ":q"
