@@ -2,7 +2,7 @@
 set -uo pipefail
 [[ -d .git ]] || git init
 [[ -f .gitignore ]] || echo ".flags/local" > .gitignore
-[[ -f .editorconfig ]] || cat << 'EOF'> .editorconfig
+[[ -f .editorconfig ]] || cat << '!'> .editorconfig
 root = true
 [*]
 	indent_style = tab
@@ -13,13 +13,8 @@ root = true
 [*.{y,ya}ml]
 	indent_style = space
 	indent_size = 2
-EOF
+!
 if ! [[ -f main.sh ]]; then
 	new bash main.sh
 	chmod +x main.sh
-fi
-if ! [[ -d .flags ]]; then
-	mkdir -p .flags/local
-	echo . > .flags/.gitkeep
-	echo . > .flags/local/.keep
 fi
