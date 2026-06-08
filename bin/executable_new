@@ -27,6 +27,8 @@ case "$lang" in
 		type=file
 		lines=(
 			'#!/usr/bin/env nu'
+			''
+			'def main [] {}'
 		)
 	;;
 	project) type=project;;
