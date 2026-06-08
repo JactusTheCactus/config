@@ -13,7 +13,4 @@ root = true
 	indent_style = space
 	indent_size = 2
 !
-if ! [[ -f main.sh ]]; then
-	new bash main.sh
-	chmod +x main.sh
-fi
+[[ -f main.sh ]] || new bash main.sh
