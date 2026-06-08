@@ -2,7 +2,6 @@
 set -uo pipefail
 [[ -d .git ]] || git init
 [[ -f .gitignore ]] || echo ".flags/local" > .gitignore
-[[ -f .editorconfig ]] || cat << '!'> .editorconfig
 root = true
 [*]
 	indent_style = tab
