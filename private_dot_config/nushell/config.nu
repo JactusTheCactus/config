@@ -47,3 +47,4 @@ todo
 def diff [...@] {
 	^diff -d --color ...$@
 }
+$env.PATH = ($env.PATH | append ~/odin)
