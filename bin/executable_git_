@@ -13,4 +13,10 @@ root = true
 	indent_style = space
 	indent_size = 2
 !
-[[ -f main.sh ]] || new bash main.sh
+if command -v nu; then
+	[[ -f main.nu ]] || new nu main.nu
+elif command -v bash; then
+	[[ -f main.sh ]] || new bash main.sh
+else
+	printf '[\e[91mERR\e[0m]: %s\n' "'nu' or 'bash' could not be found!" >&2
+fi
