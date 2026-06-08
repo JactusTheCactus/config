@@ -31,7 +31,7 @@ $env.PROMPT_COMMAND_RIGHT = {||
 $env.LC_ALL = "en_GB.UTF-8"
 def tree [...@
 	--all (-a)
-	--ignore (-i): list
+	--ignore (-i): list = [.git]
 ] {
 	(^tree ...$@
 		-CF(if $all {"a"})
