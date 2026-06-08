@@ -2,21 +2,12 @@
 set -uo pipefail
 [[ -d .git ]] || git init
 [[ -f .gitignore ]] || echo ".flags/local" > .gitignore
-root = true
-[*]
-	indent_style = tab
-	indent_size = 4
-	trim_trailing_whitespace = true
-	insert_final_newline = true
-	charset = utf-8
-[*.{y,ya}ml]
-	indent_style = space
-	indent_size = 2
-!
 if command -v nu; then
 	[[ -f main.nu ]] || new nu main.nu
 elif command -v bash; then
 	[[ -f main.sh ]] || new bash main.sh
 else
-	printf '[\e[91mERR\e[0m]: %s\n' "'nu' or 'bash' could not be found!" >&2
+	printf '[\e[91mERR\e[0m]: %s\n' \
+		"'nu' or 'bash' shells could not be found!" \
+		>&2
 fi
