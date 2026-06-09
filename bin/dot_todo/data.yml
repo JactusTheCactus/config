@@ -1,6 +1,4 @@
 buy:
-  - name: Framework 13 Laptop
-    price: 1801.53
   - name: Steam Deck 1TB OLED
     price: 1349
 vms: []
