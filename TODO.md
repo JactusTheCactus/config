@@ -1,15 +1,16 @@
 # TODO
+1. **Setup a Custom Iosevka Font**
 {%- if buy | length > 0 %}
 1. **Buy**:
-{%- for b in buy %}
+	{%- for b in buy %}
 	{% set diff = (b.price - 12.00) | round(2) -%}
 	1. `{{ b.name }}` (`${{ b.price }}`
 		{%- if diff > 0 %} [`${{ diff }}` away] {%- endif %})
-{%- endfor -%}
+	{%- endfor -%}
 {%- endif -%}
 {%- if vms | length > 0 %}
 1. **Setup VMs**:
-{%- for v in vms %}
+	{%- for v in vms %}
 	1. `{{ v }}`
-{%- endfor -%}
+	{%- endfor -%}
 {%- endif -%}
