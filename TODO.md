@@ -1,5 +1,4 @@
 # TODO
-1. **Setup a Custom Iosevka Font**
 {%- if buy | length > 0 %}
 1. **Buy**:
 	{%- for b in buy %}
