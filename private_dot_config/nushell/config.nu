@@ -52,7 +52,7 @@ def diff [...@] {
 	^diff -d --color ...$@
 }
 $env.PATH = ($env.PATH | append ~/Odin)
-$env.PATH = ($env.PATH | append $"($env.HOME)/.fnm")
+$env.PATH = ($env.PATH | append $"($env.HOME)/.local/share/fnm")
 load-env (fnm env --shell bash
 	| lines
 	| str replace 'export ' ''
