@@ -54,4 +54,4 @@ def diff [...@] {
 $env.PATH = ($env.PATH | append ~/Odin)
 $env.FNM_PATH = $'($env.HOME)/.local/share/fnm'
 $env.PATH = ($env.PATH | append $env.FNM_PATH)
-fnm env --shell nu | lines | parse | load-env
+fnm env --shell nu | lines | parse ... | load-env
