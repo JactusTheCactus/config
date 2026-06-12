@@ -52,20 +52,4 @@ todo
 def diff [...@] {
 	^diff -d --color ...$@
 }
-$env.PATH = ($env.PATH | append ~/Odin)
-$env.PATH = ($env.PATH | append $"($env.HOME)/.local/share/fnm")
-load-env (fnm env --shell bash
-	| lines
-	| str replace 'export ' ''
-	| str replace -a '"' ''
-	| split column "="
-	| rename name value
-	| where name != "FNM_ARCH" and name != "PATH"
-	| (reduce
-		-f {}
-		{|it, acc|
-			$acc | upsert $it.name $it.value
-		}
-	)
-)
-$env.PATH = ($env.PATH | append $"($env.FNM_MULTISHELL_PATH)/bin")
+$env.PATH = ($env.PATH | append $'($env.HOME)/Odin')
