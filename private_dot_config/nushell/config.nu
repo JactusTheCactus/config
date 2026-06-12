@@ -34,7 +34,7 @@ def tree [
 	--all (-a)
 	--ignore (-i): list = [.git]
 ] {
-	(^tree ...$dir
+	(^tree $dir
 		-CF(if $all {"a"})
 		--dirsfirst
 		--noreport
