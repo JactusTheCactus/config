@@ -29,15 +29,16 @@ $env.PROMPT_COMMAND_RIGHT = {||
 	date now | format date $fmt
 }
 $env.LC_ALL = "en_GB.UTF-8"
-def tree [...@
+def tree [
+	dir: path
 	--all (-a)
 	--ignore (-i): list = [.git]
 ] {
-	(^tree ...$@
+	(^tree ...$dir
 		-CF(if $all {"a"})
 		--dirsfirst
 		--noreport
-		...($ignore | each {|i| ["-I" $i] } | flatten)
+		...($ignore | each {|i| [-I $i] } | flatten)
 	) | str replace $env.HOME '~'
 }
 let agent_env = (ssh-agent -c | lines | each { |line|
