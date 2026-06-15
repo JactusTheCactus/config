@@ -30,11 +30,11 @@ $env.PROMPT_COMMAND_RIGHT = {||
 }
 $env.LC_ALL = "en_GB.UTF-8"
 def tree [
-	dir: path
+	...@
 	--all (-a)
 	--ignore (-i): list = [.git]
 ] {
-	(^tree $dir
+	(^tree ...$@
 		-CF(if $all {"a"})
 		--dirsfirst
 		--noreport
