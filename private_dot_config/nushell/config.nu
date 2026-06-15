@@ -33,10 +33,12 @@ def tree [
 	...@
 	--all (-a)
 	--ignore (-i): list = [.git]
+	--fromfile
 ] {
 	(^tree ...$@
-		-CF(if $all {"a"})
+		-CF(if $all {'a'})
 		--dirsfirst
+		(if $fromfile {'--fromfile'})
 		--noreport
 		...($ignore | each {|i| [-I $i] } | flatten)
 	) | str replace $env.HOME '~'
