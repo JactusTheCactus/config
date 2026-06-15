@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
 	imports = [./hardware-configuration.nix];
 	boot.loader.grub.enable = true;
 	boot.loader.grub.device = "/dev/sda";
@@ -32,9 +31,7 @@
 		"nix-command"
 		"flakes"
 	];
-	fonts.packages = with pkgs; [
-		fira-code
-	];
+	fonts.packages = with pkgs; [fira-code];
 	environment.systemPackages = with pkgs; [
 		bat
 		chezmoi
@@ -52,7 +49,6 @@
 		neovim
 		nushell
 		shellcheck
-		tailscale
 		tree
 		vhs
 		vivaldi
