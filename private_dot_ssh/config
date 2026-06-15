@@ -1,14 +1,14 @@
-Host nix pc phone
-# Host laptop nix pc phone
+Host nix-vm pc phone
+# Host laptop nix-vm pc phone
 	IdentityFile ~/.ssh/id/%n
 	IdentitiesOnly yes
 	LogLevel QUIET
-	# Host laptop nix pc
-	Host nix pc
+	# Host laptop nix-vm pc
+	Host nix-vm pc
 		User devin
-		Host nix pc
+		Host nix-vm pc
 			HostName 100.68.44.21
-			Host nix
+			Host nix-vm
 				Port 2222
 		# Host laptop
 		#	HostName _
