@@ -23,6 +23,7 @@
 			tab = "-"
 [keys.normal.tab]
 	b = ":sh if [[ -f main.sh ]] then ./main.sh; elif [[ -f main.nu ]]; then ./main.nu; fi"
+	C = ":bc!"
 	c = ":bc"
 	left = ":bp"
 	Q = ":q!"
