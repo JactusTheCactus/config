@@ -1,5 +1,4 @@
 # TODO
-1. Set up `Hyprland` on NixOS VM
 1. **Buy**:
 	{%- for b in buy %}
 	{% set diff = (b.price - bank) | round(2) -%}
