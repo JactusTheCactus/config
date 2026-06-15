@@ -4,13 +4,10 @@ def main [
 	...files: path
 	--editor (-e) = nano
 ] {
-	for $f in $files {
-		with-env {
-			EDITOR: (which $editor).0.path
-		} {
-			chezmoi edit $f
-		}
-	}
+	$files | each {|f| (with-env
+		{ EDITOR: (which $editor).0.path }
+		{ chezmoi edit $f }
+	) }
 	cd ~/.local/share/chezmoi
 	git add .
 	try { git commit -m - }
