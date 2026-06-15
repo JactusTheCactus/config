@@ -49,6 +49,7 @@
 		neovim
 		nushell
 		shellcheck
+		tailscale
 		tree
 		vhs
 		vivaldi
@@ -75,6 +76,7 @@
 			};
 		};
 	};
+	services.tailscale.enable = true;
 	hardware.graphics.enable = true;
 	# hardware.nvidia.modesetting.enable = true;
 	services.openssh.enable = true;
