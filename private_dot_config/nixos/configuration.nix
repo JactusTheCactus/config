@@ -52,6 +52,7 @@
 		neovim
 		nushell
 		shellcheck
+		tailscale
 		tree
 		vhs
 		vivaldi
