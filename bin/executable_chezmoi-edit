@@ -14,6 +14,7 @@ def main [
 	cd ~/.local/share/chezmoi
 	git add .
 	try { git commit -m - }
+	git pull
 	git push
 	chezmoi update
 	open ~/Machines.txt | sshp -j 'chezmoi update'
