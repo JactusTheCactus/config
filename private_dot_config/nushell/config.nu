@@ -30,7 +30,7 @@ $env.PROMPT_COMMAND_RIGHT = {||
 }
 $env.LC_ALL = "en_GB.UTF-8"
 def tree [
-	...@ = [.]
+	...@
 	--all (-a)
 	--ignore (-i): list = [.git]
 	--fromfile
@@ -38,7 +38,7 @@ def tree [
 	(^tree ...$@
 		-CF(if $all {'a'})
 		--dirsfirst
-		(if $fromfile {'--fromfile'})
+		(if $fromfile {'--fromfile'} else {null})
 		--noreport
 		...($ignore | each {|i| [-I $i] } | flatten)
 	) | str replace $env.HOME '~'
