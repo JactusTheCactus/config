@@ -38,7 +38,7 @@ def tree [
 	(^tree ...$@
 		-CF(if $all {'a'})
 		--dirsfirst
-		(if $fromfile {'--fromfile'} else {null})
+		...(if $fromfile {['--fromfile']} else {[]})
 		--noreport
 		...($ignore | each {|i| [-I $i] } | flatten)
 	) | str replace $env.HOME '~'
