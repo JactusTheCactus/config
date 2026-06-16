@@ -156,3 +156,8 @@
 	[language.indent]
 		unit = "\t"
 		tab-width = 4
+[[language]]
+	name = "nix"
+	[language.indent]
+		unit = "\t"
+		tab-width = 4
