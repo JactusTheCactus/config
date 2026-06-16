@@ -6,7 +6,6 @@
 	boot.loader.grub.enable = true;
 	boot.loader.grub.device = "/dev/sda";
 	boot.loader.grub.useOSProber = true;
-	# networking.hostName = "nix-vm";
 	networking.networkmanager.enable = true;
 	networking.firewall.allowedTCPPorts = [22];
 	time.timeZone = "America/Vancouver";
@@ -79,7 +78,7 @@
 		};
 	};
 	hardware.graphics.enable = true;
-	hardware.nvidia.modesetting.enable = true;
+	# hardware.nvidia.modesetting.enable = true;
 	services.openssh.enable = true;
 	system.stateVersion = "25.11";
 }
