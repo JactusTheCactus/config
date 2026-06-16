@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }: {
-	imports = [./hardware-configuration.nix];
+	imports = [
+		./hardware-configuration.nix
+		(if builtins.pathExists ./local.nix then ./local.nix else {})
+	];
 	boot.loader.grub.enable = true;
 	boot.loader.grub.device = "/dev/sda";
 	boot.loader.grub.useOSProber = true;
