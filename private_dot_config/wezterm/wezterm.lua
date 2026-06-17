@@ -14,7 +14,10 @@ local act_rel = act.ActivateTabRelative
 local fira = wezterm.font 'Fira Code'
 return helpers.merge(wezterm.config_builder(), {
 	background = {{
-		source = { File = '/usr/share/backgrounds/ubuntu-wallpaper-d.png' },
+		source = { File =
+			-- '/usr/share/backgrounds/ubuntu-wallpaper-d.png'
+			'~/Pictures/Wallpapers/Kath.png'
+		},
 		opacity = 0.95,
 		vertical_align = 'Middle',
 		horizontal_align = 'Center'
