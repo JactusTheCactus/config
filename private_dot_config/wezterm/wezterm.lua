@@ -32,7 +32,7 @@ return helpers.merge(wezterm.config_builder(), {
 		{ 'CTRL', 'RightArrow', act_rel(1) },
 		{ 'CTRL', 't', act.SpawnTab 'CurrentPaneDomain' }
 	}, function(o)
-		{
+		return {
 			mods = o[1],
 			key = o[2],
 			action = o[3]
