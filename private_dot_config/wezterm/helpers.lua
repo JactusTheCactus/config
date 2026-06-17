@@ -22,10 +22,10 @@ function helpers.merge(default, overwrite)
 		result[k] = v
 	end
 	for k, v in pairs(overwrite or {}) do
-		if helpers.all(
+		if helpers.all({
 			type(result[k]) == 'table',
 			type(v) == 'table'
-		) then
+		}) then
 			result[k] = helpers.merge(result[k], v)
 		else
 			result[k] = v
