@@ -49,4 +49,7 @@ function helpers.map(tbl, f)
 	end
 	return t
 end
+function helpers.path(p)
+	return string.gsub(p, '~', '/home/devin')
+end
 return helpers

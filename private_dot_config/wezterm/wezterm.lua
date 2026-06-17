@@ -14,7 +14,7 @@ local act_rel = act.ActivateTabRelative
 local fira = wezterm.font 'Fira Code'
 return helpers.merge(wezterm.config_builder(), {
 	background = {{
-		source = { File='/home/devin/Pictures/Wallpapers/Kath.png' },
+		source = { File = helpers.path('~/Pictures/Wallpapers/Kath.png') },
 		opacity = 0.95,
 		vertical_align = 'Middle',
 		horizontal_align = 'Center',
