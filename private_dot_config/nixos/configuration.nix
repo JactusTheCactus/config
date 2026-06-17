@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
 	imports = [
 		./hardware-configuration.nix
 		(if builtins.pathExists ./local.nix then ./local.nix else {})
