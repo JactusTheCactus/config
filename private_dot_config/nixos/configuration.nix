@@ -89,18 +89,6 @@
 		enable = true;
 		extraPortals = with pkgs; [xdg-desktop-portal-gtk];
 	};
-	services = {
-		greetd = {
-			enable = true;
-			settings = {
-				default_session = {
-					user = "greeter";
-					command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-				};
-			};
-		};
-		openssh.enable = true;
-	};
 	hardware.graphics.enable = true;
 	system.stateVersion = "25.11";
 }
