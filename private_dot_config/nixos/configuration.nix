@@ -61,6 +61,7 @@
 			shellcheck
 			tree
 			vhs
+			vivaldi
 			wezterm
 			waybar
 			wofi
