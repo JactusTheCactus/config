@@ -44,7 +44,7 @@
 		helix
 		hyprpaper
 		lazygit
-		libreoffice
+		# libreoffice
 		lolcat
 		lowdown
 		mc
@@ -79,7 +79,6 @@
 		};
 	};
 	hardware.graphics.enable = true;
-	# hardware.nvidia.modesetting.enable = true;
 	services.openssh.enable = true;
 	system.stateVersion = "25.11";
 }
