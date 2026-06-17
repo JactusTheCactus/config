@@ -35,16 +35,16 @@ function helpers.merge(default, overwrite)
 end
 function helpers.map(tbl, f)
 	local t = {}
-	t = helpers.table_type(tbl)
-	if t == 'indexed' then
+	local ty = helpers.table_type(tbl)
+	if ty == 'indexed' then
 		for i, v in ipairs(tbl) do
 			t[i] = f(v)
 		end
-	elseif t == 'associative' then
+	elseif ty == 'associative' then
 		for k, v in pairs(tbl) do
 			t[k] = f(v, k)
 		end
-	elseif t == 'not-a-table' then
+	elseif ty == 'not-a-table' then
 		error(string.format('[ERR]: %s is not a table', tostring(tbl)))
 	end
 	return t
