@@ -44,6 +44,7 @@
 		helix
 		hyprpaper
 		lazygit
+		libreoffice
 		lolcat
 		lowdown
 		mc
