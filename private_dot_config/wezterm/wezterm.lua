@@ -18,9 +18,12 @@ return helpers.merge(wezterm.config_builder(), {
 			-- '/usr/share/backgrounds/ubuntu-wallpaper-d.png'
 			'/home/devin/Pictures/Wallpapers/Kath.png'
 		},
-		opacity = 0.5,
+		opacity = 0.95,
 		vertical_align = 'Middle',
-		horizontal_align = 'Center'
+		horizontal_align = 'Center',
+		hsb = {
+			brightness = 0.5
+		}
 	}},
 	clean_exit_codes = { 130 },
 	colors = {
