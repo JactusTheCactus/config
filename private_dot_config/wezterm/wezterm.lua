@@ -31,13 +31,7 @@ return helpers.merge(wezterm.config_builder(), {
 		{ 'CTRL', 'LeftArrow', act_rel(-1) },
 		{ 'CTRL', 'RightArrow', act_rel(1) },
 		{ 'CTRL', 't', act.SpawnTab 'CurrentPaneDomain' }
-	}, function(o)
-		return {
-			mods = o[1],
-			key = o[2],
-			action = o[3]
-		}
-	end),
+	}, function(o) return { mods = o[1], key = o[2], action = o[3] } end),
 	log_unknown_escape_sequences = true,
 	min_scroll_bar_height = '2cell',
 	quote_dropped_files = 'Posix',

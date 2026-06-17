@@ -13,10 +13,10 @@ function helpers.merge(default, overwrite)
 		result[k] = v
 	end
 	for k, v in pairs(overwrite or {}) do
-		if helpers.all({
-			type(result[k]) == 'table',
-			type(v) == 'table',
-		}) then
+		if helpers.all(helpers.map(
+			{ result[k], v },
+			function(x) return type(x) == 'table' end
+		)) then
 			result[k] = helpers.merge(result[k], v)
 		else
 			result[k] = v
@@ -24,9 +24,9 @@ function helpers.merge(default, overwrite)
 	end
 	return result
 end
-function helpers.map(tbl, f)
+function helpers.map(arr, f)
 	local t = {}
-	for i, v in ipairs(tbl) do
+	for i, v in ipairs(arr) do
 		t[i] = f(v)
 	end
 	return t
