@@ -16,7 +16,7 @@ return helpers.merge(wezterm.config_builder(), {
 	background = {{
 		source = { File =
 			-- '/usr/share/backgrounds/ubuntu-wallpaper-d.png'
-			'~/Pictures/Wallpapers/Kath.png'
+			'/home/devin/Pictures/Wallpapers/Kath.png'
 		},
 		opacity = 0.95,
 		vertical_align = 'Middle',
