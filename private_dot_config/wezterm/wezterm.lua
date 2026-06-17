@@ -27,11 +27,17 @@ return helpers.merge(wezterm.config_builder(), {
 	enable_wayland = false,
 	font = fira,
 	font_size = 20,
-	keys = {
-		{ mods = 'CTRL', key = 'LeftArrow', action = act_rel(-1) },
-		{ mods = 'CTRL', key = 'RightArrow', action = act_rel(1) },
-		{ mods = 'CTRL', key = 't', action = act.SpawnTab 'CurrentPaneDomain' }
-	},
+	keys = helpers.map({
+		{ 'CTRL', 'LeftArrow', act_rel(-1) },
+		{ 'CTRL', 'RightArrow', act_rel(1) },
+		{ 'CTRL', 't', act.SpawnTab 'CurrentPaneDomain' }
+	}, function(o)
+		{
+			mods = o[1],
+			key = o[2],
+			action = o[3]
+		}
+	end),
 	log_unknown_escape_sequences = true,
 	min_scroll_bar_height = '2cell',
 	quote_dropped_files = 'Posix',

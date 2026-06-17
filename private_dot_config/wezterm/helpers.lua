@@ -24,4 +24,11 @@ function helpers.merge(default, overwrite)
 	end
 	return result
 end
+function helpers.map(tbl, f)
+	local t = {}
+	for i, v in ipairs(tbl) do
+		t[i] = f(v)
+	end
+	return t
+end
 return helpers
