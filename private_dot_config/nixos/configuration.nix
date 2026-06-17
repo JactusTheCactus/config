@@ -31,24 +31,16 @@
 	users.users.devin = {
 		isNormalUser = true;
 		description = "devin";
-		extraGroups = [
-			"networkmanager"
-			"wheel"
-		];
+		extraGroups = ["networkmanager" "wheel"];
 		packages = with pkgs; [];
-		shell = pkgs.nushell;
+		shell = with pkgs; nushell;
 	};
 	nixpkgs.config.allowUnfree = true;
-	nix.settings.experimental-features = [
-		"nix-command"
-		"flakes"
-	];
+	nix.settings.experimental-features = ["nix-command" "flakes"];
 	fonts.packages = with pkgs; [fira-code];
 	environment = {
 		shells = with pkgs; [nushell];
-		variables = {
-			TERMINAL = "wezterm";
-		};
+		variables.TERMINAL = "wezterm";
 		systemPackages = with pkgs; [
 			bat
 			chezmoi
@@ -76,7 +68,7 @@
 			(pkgs.writeShellApplication {
 				name = "ns";
 				runtimeInputs = with pkgs; [fzf nix-search-tv];
-				text = builtins.readFile "${pkgs.nix-search-tv.src}/nixpkgs.sh";
+				text = with pkgs; builtins.readFile "${nix-search-tv.src}/nixpkgs.sh";
 				excludeShellChecks = ["SC2016"];
 			})
 		];
