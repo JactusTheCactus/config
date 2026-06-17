@@ -22,7 +22,7 @@ return helpers.merge(wezterm.config_builder(), {
 		vertical_align = 'Middle',
 		horizontal_align = 'Center',
 		hsb = {
-			brightness = 0.5
+			brightness = 0.125
 		}
 	}},
 	clean_exit_codes = { 130 },
