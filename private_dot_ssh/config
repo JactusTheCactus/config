@@ -1,17 +1,13 @@
 Host nix-vm pc phone
-# Host laptop nix-vm pc phone
 	IdentityFile ~/.ssh/id/%n
 	IdentitiesOnly yes
 	LogLevel QUIET
-	# Host laptop nix-vm pc
 	Host nix-vm pc
 		User devin
 		Host nix-vm pc
 			HostName 100.68.44.21
 			Host nix-vm
 				Port 2222
-		# Host laptop
-		#	HostName _
 	Host phone
 		User u0_a221
 		HostName 100.70.48.98
